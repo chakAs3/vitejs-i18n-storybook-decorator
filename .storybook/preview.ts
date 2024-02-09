@@ -6,27 +6,29 @@ import { createI18n , useI18n } from "vue-i18n";
 
 
 
+const i18n = createI18n({
+  useScope: "global",
+  locale: 'sk',
+  legacy: false,
+  globalInjection: true,
+  messages: {
+    sk: skLocale,
+    en: enLocale,
+  },
+});
 setup((app: App) => {
-  const i18n = createI18n({
-    useScope: "global",
-    locale: 'sk',
-    legacy: false,
-    globalInjection: true,
-    messages: {
-      sk: skLocale,
-      en: enLocale,
-    },
-  });
   app.use(i18n);
 });
+// reactive locales
 const locale = ref('sk');
-const withLocale: Decorator = (Story, context) => {
+const withLocale: Decorator = (storyFn, context) => {
   locale.value = context.globals.locale || 'en'
-  useI18n().locale = locale.value
-  const story = Story()
+  const story = storyFn();
+  // Vue 3 "Functional" component as decorator
   return () => {
-    h('div',{locale},{ story: ()=> h(story,{...context.args})})
-  }
+    useI18n().locale.value = locale.value
+    return h('div', { style: 'border: 5px solid blue' }, [ h('p', `[Wrapper] Current locale: ${useI18n().locale.value}`),h(story, context.args)]);
+  };
 };
 
 const preview: Preview = {

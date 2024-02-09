@@ -3,23 +3,20 @@ import { useI18n } from 'vue-i18n';
 
 const { t, locale } = useI18n();
 
-function onClick() {
-  console.log(locale.value);
-  if (locale.value === 'sk') {
-    locale.value = 'en';
-  } else if (locale.value === 'en') {
-    locale.value = 'sk';
-  }
-}
+
 </script>
 
 <template>
-  <button type="button" class="storybook-button--primary" @click="onClick">
-    {{ $t('language') }}
-  </button>
-  <div>
+
+  <h1>
     {{ t('language') }}
-  </div>
+  </h1>
+  <h2>
+    {{ t('hello') }}
+  </h2>
+  <p>
+  [Story]  Current Language :{{ locale }}
+  </p>
 </template>
 
 <style scoped></style>

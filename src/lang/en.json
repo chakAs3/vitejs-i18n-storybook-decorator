@@ -1,3 +1,5 @@
 {
-  "language": "english"
+    "language": "english",
+    "hello": "Hello",
+    "world": "World"
 }

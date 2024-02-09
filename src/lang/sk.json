@@ -1,3 +1,5 @@
 {
-  "language": "slovak"
+    "language": "slovak",
+    "hello": "Ahoj svet",
+    "world": "Svet"
 }
